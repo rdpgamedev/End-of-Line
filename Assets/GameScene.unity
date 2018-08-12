@@ -695,13 +695,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 819191136}
   acceleration: 0.5
-  decay: 15
-  gravity: 30
+  decay: 23.2
+  gravity: 49.5
   startingSpeed: 3
-  jumpingSpeed: 3
-  apexTime: 0.78
-  jumpVel: 10
-  grabTime: 0.25
+  apexTime: 0.667
+  jumpVel: 11.8
+  grabTime: 0.208
 --- !u!1 &1491411877
 GameObject:
   m_ObjectHideFlags: 0

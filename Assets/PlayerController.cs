@@ -14,14 +14,12 @@ public class PlayerController : MonoBehaviour
     /*** Public Tweakable Fields ***/
     [Range(0.0f, 1.0f)]
     public float acceleration  = 0.5f;  // The horizontal acceleration experienced while riding a line
-    [Range(0.0f, 20.0f)]
+    [Range(0.0f, 30.0f)]
     public float decay         = 1.0f;  // The acceleration experienced in a jump before the apex
-    [Range(0.0f, 40.0f)]
+    [Range(0.0f, 60.0f)]
     public float gravity       = 1.0f;  // The acceleration experienced in a jump after the apex
     [Range(0.0f, 5.0f)]
     public float startingSpeed = 0.25f; // The starting horizontal speed of the player
-    [Range(0.0f, 5.0f)]
-    public float jumpingSpeed  = 3.0f; // The horizontal speed while midjump
     [Range(0.0f, 1.0f)]
     public float apexTime      = 1.0f;  // The time that a jump will be rising
     [Range(0.0f, 30.0f)]
@@ -79,10 +77,20 @@ public class PlayerController : MonoBehaviour
         touchingNext = false;
         canGrab = false;
         grabTimer = 0.0f;
-        if (velocity.x == 0.0f) velocity.Set(startingSpeed, 0.0f);
+        if (velocity.x == 0.0f) 
+        {
+            velocity.Set(startingSpeed, 0.0f);
+        }
+        else 
+        {
+            velocity += new Vector2(acceleration, 0.0f);
+        }
 
         // Align vertical position with riding platform
         float platformY = GameManager.instance.ActivePlatform.transform.position.y;
+        transform.position = new Vector3(transform.position.x, 
+                                         platformY, 
+                                         transform.position.z);
     }
 
     void OnTriggerEnter(Collider other)
@@ -177,11 +185,11 @@ public class PlayerController : MonoBehaviour
         // Update Vertical
         if (rising)
         {
-            velocity.Set(jumpingSpeed, velocity.y - decay * Time.deltaTime);
+            velocity.Set(velocity.x, velocity.y - decay * Time.deltaTime);
         }
         else if (falling)
         {
-            velocity.Set(jumpingSpeed, velocity.y - gravity * Time.deltaTime);
+            velocity.Set(velocity.x, velocity.y - gravity * Time.deltaTime);
         }
 
         // Update Horizontal

@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
     public void AddPlatform()
     {
         Platform lastPlatform = platforms.Last.Value;
-        float jumpSpeed = PlayerController.instance.jumpingSpeed;
+        float jumpSpeed = Mathf.Max(PlayerController.instance.Velocity.x, 
+                                    PlayerController.instance.startingSpeed);
         Vector3 startPos = lastPlatform.EndPoint + jumpSpeed * Vector2.right;
         startPos += lastPlatform.transform.position;
 

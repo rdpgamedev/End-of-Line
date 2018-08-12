@@ -51,7 +51,7 @@ public class Platform : MonoBehaviour
 
     void UpdateCollider()
     {
-        lineCollider.size.Set(length + 0.25f, lineCollider.size.y);
-        lineCollider.offset.Set(length/2, 0);
+        lineCollider.size = new Vector2(length + 0.25f, lineCollider.size.y);
+        lineCollider.offset = new Vector2(length/2, 0);
     }
 }

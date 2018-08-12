@@ -57,8 +57,10 @@ public class PlayerController : MonoBehaviour
     void Update() 
     {
         if (canGrab) grabTimer += Time.deltaTime;
+        
         UpdateInput();
         UpdateJump();
+        CheckPlatform();
         UpdateVelocity();
         UpdatePosition();
         CheckDeath();
@@ -95,7 +97,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered " + other);
         GameObject collidingObj = other.gameObject.transform.parent.gameObject;
         GameObject nextPlatformObj = GameManager.instance.NextPlatform.gameObject;
         if (collidingObj == nextPlatformObj)
@@ -106,7 +107,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exited " + other);
         GameObject collidingObj = other.gameObject.transform.parent.gameObject;
         GameObject nextPlatformObj = GameManager.instance.NextPlatform.gameObject;
         if (collidingObj == nextPlatformObj)
@@ -222,6 +222,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player Y: " + transform.position.y);
             Debug.Log("ScreenBottom Y: " + worldBottom.y);
             SceneManager.LoadScene("GameScene");
+        }
+    }
+
+    void CheckPlatform()
+    {
+        if (!riding) return;
+        Platform activePlatform = GameManager.instance.ActivePlatform;
+        if (!playerCollider.IsTouching(activePlatform.lineCollider))
+        {
+            riding = false;
+            falling = true;
         }
     }
 }

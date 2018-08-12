@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour 
 {
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         UpdateJump();
         UpdateVelocity();
         UpdatePosition();
+        CheckDeath();
     }
 
     void Init()
@@ -198,5 +200,20 @@ public class PlayerController : MonoBehaviour
             transform.position.y + velocity.y * Time.deltaTime,
             0.0f);
         transform.position = newPos;
+    }
+
+    void CheckDeath()
+    {
+        Camera cam = GameManager.instance.mainCamera.GetComponent<Camera>();
+        Vector3 screenBottom = new Vector3(cam.pixelWidth/2,
+                                           0,
+                                           cam.nearClipPlane);
+        Vector3 worldBottom = cam.ScreenToWorldPoint(screenBottom);
+        if (transform.position.y < worldBottom.y)
+        {
+            Debug.Log("Player Y: " + transform.position.y);
+            Debug.Log("ScreenBottom Y: " + worldBottom.y);
+            SceneManager.LoadScene("GameScene");
+        }
     }
 }

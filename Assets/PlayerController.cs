@@ -110,6 +110,9 @@ public class PlayerController : MonoBehaviour
 
         // Increase score
         Score.instance.IncScore();
+
+        // Shake cam
+        GameManager.instance.mainCamera.GetComponent<MainCamera>().Shake(0.7f, 1.0f);
     }
 
     void OnTriggerEnter(Collider other)

@@ -107,6 +107,9 @@ public class PlayerController : MonoBehaviour
         // Set animation
         pivotAnim.ResetTrigger("Jump");
         pivotAnim.SetTrigger("Ride");
+
+        // Increase score
+        Score.instance.IncScore();
     }
 
     void OnTriggerEnter(Collider other)

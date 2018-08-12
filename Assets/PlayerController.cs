@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
 	
     void Update() 
     {
+
+    }
+
+    void FixedUpdate()
+    {
         if (canGrab) grabTimer += Time.deltaTime;
         
         UpdateInput();

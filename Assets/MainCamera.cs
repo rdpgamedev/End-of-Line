@@ -14,6 +14,11 @@ public class MainCamera : MonoBehaviour
 	
     void Update () 
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         FollowTarget();
     }
 

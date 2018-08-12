@@ -5202,6 +5202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1170444694}
+  - component: {fileID: 1170444695}
   m_Layer: 0
   m_Name: SpritePivot
   m_TagString: Untagged
@@ -5223,6 +5224,24 @@ Transform:
   m_Father: {fileID: 1431500135}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1170444695
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1170444693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2cd9f67125323a45a6431cc764e3ec7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1302874411
 Prefab:
   m_ObjectHideFlags: 0
@@ -5316,6 +5335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 819191136}
+  lineParticles: {fileID: 1478994047}
+  pivotAnim: {fileID: 1170444695}
   acceleration: 0.5
   decay: 23.2
   gravity: 49.5

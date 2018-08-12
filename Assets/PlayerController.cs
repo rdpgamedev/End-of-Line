@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     /*** Public Fields ***/
     public BoxCollider2D playerCollider;
+    public ParticleSystem lineParticles;
+    public Animator pivotAnim;
 
     /*** Public Tweakable Fields ***/
     [Range(0.0f, 1.0f)]
@@ -98,6 +100,13 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 
                                          platformY, 
                                          transform.position.z);
+
+        // Start line particles
+        lineParticles.Play();
+
+        // Set animation
+        pivotAnim.ResetTrigger("Jump");
+        pivotAnim.SetTrigger("Ride");
     }
 
     void OnTriggerEnter(Collider other)
@@ -129,6 +138,13 @@ public class PlayerController : MonoBehaviour
 
         // Apply jump velocity
         velocity.Set(velocity.x, jumpVel);
+
+        // Stop line particles
+        lineParticles.Stop();
+
+        // Set animation
+        pivotAnim.ResetTrigger("Ride");
+        pivotAnim.SetTrigger("Jump");
     }
 
     bool GrabLine()
@@ -238,6 +254,8 @@ public class PlayerController : MonoBehaviour
         {
             riding = false;
             falling = true;
+            // Stop line particles
+            lineParticles.Stop();
         }
     }
 }
